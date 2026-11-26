@@ -3,10 +3,22 @@
 import express from "express";
 import healthRouter from "./routes/health.routes";
 import { requestLogger } from "./middlewares/request-logger.middleware";
+import { notFoundMiddleware } from "./middlewares/not-found.middleware";
+import { ErrorHandler } from "./middlewares/error.middleware";
+
+
 
 const app = express();
+
+
 app.use(requestLogger);//we want it for all incomng requests , even for routes that doesnt match
 app.use(express.json());
+
+
+
 app.use("/api/v1/health", healthRouter);
+
+app.use(notFoundMiddleware); 
+app.use(ErrorHandler);
 
 export default app;

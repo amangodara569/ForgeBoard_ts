@@ -50,3 +50,18 @@ import { Router } from "express"
 // - Requested URL
 // - Response status code
 // - Request processing duration
+
+
+
+
+flowchart TD
+    A[Incoming Request] --> B[Request Logger]
+    B --> C[JSON Parser]
+    C --> D{Matching Route?}
+    D -->|Yes| E[Route Handler]
+    D -->|No| F[404 Middleware]
+    E --> G{Error occurred?}
+    G -->|No| H[Response]
+    G -->|Yes| I[Error Middleware]
+    F --> H
+    I --> J[Error Response]
