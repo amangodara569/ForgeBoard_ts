@@ -1,29 +1,18 @@
-//flow
-//node js starts -server.ts -> create express app ->configure middleware ->register routes -> starts http server ->listen to port -> recieve incoming requests -> process requests -> send response back to client
+//how we split the code into multiple files and import them into server.ts
+//we import the app from app.ts and listen on the port specified in the environment variable PORT or default to 3000
+//we also check if the PORT is a valid integer between 1 and 65535, if not we throw an error
+//we also log the port number to the console when the server starts listening
+//
 
-import express from "express";
 
-const app = express();
+import app from "./app";
+
 const PORT = Number(process.env.PORT ?? 3000);
 
-if (!Number.isInteger(PORT) || PORT < 1 || PORT  > 65535) { //if port is not A NUMBER AND PORT <1 ND PORT >SPECIFIED NO , THROW ERROR
+if (!Number.isInteger(PORT) || PORT < 1 || PORT > 65535) {
     throw new Error("PORT must be an integer between 1 and 65535");
 }
 
-//middleware (PARSE incoming json request, it makes json data accessible through req.body)
-app.use(express.json());
-
-//health check route
-app.get("/api/v1/health", (_req, res) => {
-    res.status(200).json({
-        success: true,
-        message: "API running",
-    });
-});
-
-
-
-//this starts the http server and makes incoming request listen on secified port
 app.listen(PORT, () => {
     console.log(`API listening on port ${PORT}`);
 });
