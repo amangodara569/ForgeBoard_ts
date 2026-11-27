@@ -54,14 +54,29 @@ import { Router } from "express"
 
 
 
-flowchart TD
-    A[Incoming Request] --> B[Request Logger]
-    B --> C[JSON Parser]
-    C --> D{Matching Route?}
-    D -->|Yes| E[Route Handler]
-    D -->|No| F[404 Middleware]
-    E --> G{Error occurred?}
-    G -->|No| H[Response]
-    G -->|Yes| I[Error Middleware]
-    F --> H
-    I --> J[Error Response]
+//typescript type middlewares
+They tell TypeScript what kind of function we're creating and what parameters that function receives.
+
+
+req.body – Request body.
+req.params – URL parameters.
+req.query – Query parameters.
+req.headers – HTTP headers.
+req.method – HTTP method.
+req.url – Requested URL.
+
+
+//response
+res.status(200);
+res.json({ message: "Success" });
+res.send("Hello");
+res.cookie("token", "abc");
+
+ RequestHandler
+This is particularly useful.
+
+Instead of defining the types of req, res and next individually, Express provides a predefined type called RequestHandler.
+
+
+ErrorRequestHandler
+This is specifically for error-handling middleware.
