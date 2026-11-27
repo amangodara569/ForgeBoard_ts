@@ -18,13 +18,13 @@ const issues: Issue[] = [
 
 
 //temportary functions to perform CRUD operations on issues, these functions will be replaced by real db queries once we implement a real db.
-export const getAllIssues = async():Promise<Issue[]> => {
+export const findAllIssues = async():Promise<Issue[]> => {
     return [...issues];
 }
 //return type is Promise<Issue | null> because we are returning a single issue or null if the issue is not found.
 //[...issues] is used to return a copy of the issues array instead of returning the original array, this is done to prevent accidental modification of the original array from outside the repository.
 
-export const getIssueById = async(id:string): Promise<Issue | null> => {
+export const findIssueById = async(id:string): Promise<Issue | null> => {
     const issue = issues.find((i) => i.id === id);
     return issue || null;
 }
