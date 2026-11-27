@@ -2,6 +2,7 @@ import {findIssueById, findAllIssues} from "../repository/issue.repository";
 import type {Issue, IssueStatus} from "../types/issues.types";
 
 export const getAllIssues = async (status?: IssueStatus): Promise<Issue[]> =>{
+    //here status?: IssueStatus used as a filter 
     const issues = await findAllIssues();
     if (status) {
         return issues.filter((issue) => issue.status === status);

@@ -5,7 +5,7 @@ import healthRouter from "./routes/health.routes";
 import { requestLogger } from "./middlewares/request-logger.middleware";
 import { notFoundMiddleware } from "./middlewares/not-found.middleware";
 import { ErrorHandler } from "./middlewares/error.middleware";
-
+import issueRouter from "./routes/issue.routes";
 
 
 const app = express();
@@ -17,6 +17,7 @@ app.use(express.json());
 
 
 app.use("/api/v1/health", healthRouter);
+app.use("/api/v1/issues", issueRouter);
 
 app.use(notFoundMiddleware); 
 app.use(ErrorHandler);
